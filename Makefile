@@ -1,2 +1,2 @@
-all: Hello,World.c CC.c
-		gcc -Wall Hello,World.c CC.c -o chessviz
+all: board.c
+	gcc -o chessviz -Wall board.c
