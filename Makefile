@@ -1,2 +1,2 @@
-all: board.c
-	gcc -o chessviz -Wall board.c
+all: main.c
+	gcc -o chessviz -Wall main.c
