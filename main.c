@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+//#include <stdlib.h>
 
 int desk(char mass[9][9])
 {
@@ -12,6 +14,7 @@ int desk(char mass[9][9])
       }
     printf("\n\n");
     }
+  printf("\n\n\n");
   return 0;
  }
 
@@ -32,17 +35,115 @@ mass[0][8]='H';
  return printf("Format of move - 'a2-a4'\nMove realize only for 'P(p)'\n");
 }
 
-
-
-int game(char mass[][9])
+int move(char mass[9][9])
 {
-  //
-  return printf("\nGame over!\n");
+  int FlagOfEnd=0;
+  char stepper[7];
+  printf("Turn is :\n");
+  scanf("%s", stepper);
+  printf("\nWrite 'End' to end\n");
+ if(!strcmp("a2-a3", stepper))
+  {
+   mass[7][1]=' ';
+   mass[6][1]='p';
+  }
+ if (!strcmp("a2-a4", stepper))
+   { 
+    mass[7][1]=' ';
+    mass[5][1]='p';
+   }
+  if(!strcmp("b2-b3", stepper))
+  {
+   mass[7][2]=' ';
+   mass[6][2]='p';
+  }
+ if (!strcmp("b2-b4", stepper))
+   { 
+    mass[7][2]=' ';
+    mass[5][2]='p';
+   }
+  if(!strcmp("c2-c3", stepper))
+  {
+   mass[7][3]=' ';
+   mass[6][3]='p';
+  }
+ if (!strcmp("c2-c4", stepper))
+   { 
+    mass[7][3]=' ';
+    mass[5][3]='p';
+   }
+ if(!strcmp("d2-d3", stepper))
+  {
+   mass[7][4]=' ';
+   mass[6][4]='p';
+  }
+ if (!strcmp("d2-d4", stepper))
+   { 
+    mass[7][4]=' ';
+    mass[5][4]='p';
+   }
+ if(!strcmp("e2-e3", stepper))
+  {
+   mass[7][5]=' ';
+   mass[6][5]='p';
+  }
+ if (!strcmp("e2-e4", stepper))
+   { 
+    mass[7][5]=' ';
+    mass[5][5]='p';
+   }
+ if(!strcmp("f2-f3", stepper))
+  {
+   mass[7][6]=' ';
+   mass[6][6]='p';
+  }
+ if (!strcmp("f2-f4", stepper))
+   { 
+    mass[7][6]=' ';
+    mass[5][6]='p';
+   }
+ if(!strcmp("g2-g3", stepper))
+  {
+   mass[7][7]=' ';
+   mass[6][7]='p';
+  }
+ if (!strcmp("g2-g4", stepper))
+   { 
+    mass[7][7]=' ';
+    mass[5][7]='p';
+   }
+ if(!strcmp("h2-h3", stepper))
+  {
+   mass[7][8]=' ';
+   mass[6][8]='p';
+  }
+ if (!strcmp("h2-h4", stepper))
+   { 
+    mass[7][8]=' ';
+    mass[5][8]='p';
+   }
+if(!strcmp("End", stepper))
+   {
+   FlagOfEnd=1;
+   }
+if (FlagOfEnd==1)
+  {
+  printf("\nWrong format\n\n"); 
+  }
+  return 0;
 }
 
-int move()
+int game(char mass[9][9])
 {
-  return 0;
+  while (1)
+  {
+  int step=1;
+  move(mass);
+  printf("\nStep #%d\n\n", step);
+  step++;
+  desk(mass);
+  }	
+  return printf("\nGame over!\n");
 }
 
 int main()
