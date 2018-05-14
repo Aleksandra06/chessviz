@@ -14,4 +14,4 @@ build/board_print.o: src/board_print.c
 
 .PHONY : clean
 clean:
-	rm -rf build/*.o
+rm -rf build/*.o
