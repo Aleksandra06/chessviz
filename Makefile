@@ -1,17 +1,46 @@
-all: bin/main
+CFLAGS = -Wall -Werror -std=c99
+CC = gcc
+OBJ = $(CC) -c $< -o $@ $(CFLAGS)
+MKDIR_BUILD = mkdir -p build/src
 
-bin/main: build/main.o build/board.o build/board_print.o
-	gcc -Wall -Werror build/main.o build/board.o build/board_print.o -o bin/main
+.PHONY: clean test
 
-build/main.o: src/main.c
-	gcc -std=c99 -Wall -Werror -c src/main.c -o build/main.o
+default: bin/chess.exe
 
-build/board.o: src/board.c
-	gcc -std=c99 -Wall -Werror -c src/board.c -o build/board.o
+test: bin/chess_test.exe
+	$<
 
-build/board_print.o: src/board_print.c
-	gcc -std=c99 -Wall -Werror -c src/board_print.c -o build/board_print.o
+bin/chess_test.exe: build/test/main_test.o build/src/board_print_plain.o build/src/board_start.o build/src/board.o build/src/board_read.o
+	mkdir -p bin
+	$(CC) $^ -o $@ $(CFLAGS)
 
-.PHONY : clean
+build/test/main_test.o: test/main.c thirdparty/ctest.h src/board.h
+	mkdir -p build/test
+	$(OBJ) -I thirdparty -I src
+
+bin/chess.exe: build/src/main.o build/src/board_print_plain.o build/src/board_start.o build/src/board.o build/src/board_read.o
+	mkdir -p bin
+	$(CC) $^ -o $@ $(CFLAGS)
+
+build/src/main.o: src/main.c
+	$(MKDIR_BUILD)
+	$(OBJ)
+
+build/src/board_print_plain.o: src/board_print_plain.c src/board_print_plain.h
+	$(MKDIR_BUILD)
+	$(OBJ)
+
+build/src/board_start.o: src/board_start.c src/board_start.h
+	$(MKDIR_BUILD)
+	$(OBJ)
+
+build/src/board.o: src/board.c src/board.h
+	$(MKDIR_BUILD)
+	$(OBJ)
+
+build/src/board_read.o: src/board_read.c src/board_read.h
+	$(MKDIR_BUILD)
+	$(OBJ)
+
 clean:
-rm -rf build/*.o
+	rm -rf build bin
