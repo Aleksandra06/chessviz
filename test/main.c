@@ -7,7 +7,7 @@
 #include <ctest.h>
 
 CTEST(Syntax, Correct) {
-    int result = check_input("a2-a5");
+    int result = check_input("b2-b5");
     int expected = 0;
     ASSERT_EQUAL(expected, result);
 }
